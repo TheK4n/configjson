@@ -220,10 +220,11 @@ Returns False if dict values not same type
 
 @rtype: bool"""
         dict_values = list(map(type, list(_dictionary.values())))
-        while dict_values:
-            i = dict_values.pop(0)
-            if i in dict_values:
-                return False
+        while dict_values > 1:
+            zero = dict_values.pop(0)
+            for i in dict_values:
+                if not isinstance(zero, type(i)):
+                    return False
         return True
 
     @staticmethod
