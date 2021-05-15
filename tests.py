@@ -4,6 +4,7 @@ from ConfigJson import *
 
 with_repetitions_no_diff_types = configjson()
 no_repetitions_diff_types = configjson()
+repetitions_diff_types = configjson()
 cfg = configjson()
 
 wr = with_repetitions_no_diff_types(
@@ -16,6 +17,13 @@ wr = with_repetitions_no_diff_types(
 nr = no_repetitions_diff_types(
         z=2,
         a=1,
+        pin=3,
+        hash='asdasda',
+        xuy=16).get()
+
+wrnr = repetitions_diff_types(
+        z=2,
+        a=3,
         pin=3,
         hash='asdasda',
         xuy=16).get()
@@ -49,6 +57,8 @@ class TestStringMethods(unittest.TestCase):
 
     def test_Errors(self):
         self.assertRaises(RepetitionsError, with_repetitions_no_diff_types.sorted_by_values)
+        self.assertRaises(RepetitionsError, with_repetitions_no_diff_types.sorted_by_values)
+        self.assertRaises(NotSameTypeError, no_repetitions_diff_types.sorted_by_values)
 
 
 if __name__ == '__main__':

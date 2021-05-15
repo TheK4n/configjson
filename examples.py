@@ -9,9 +9,10 @@ if __name__ == '__main__':
         z=2,
         a=1,
         pin=3,
-        hash=3,
+        hash='asd',
         xuy=16).get()
 
+    cfg.sorted_by_values()
     print(type(g))  # <class 'dict'>
     print(cfg)
 
