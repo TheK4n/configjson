@@ -263,7 +263,6 @@ kwarg:    type:   default:
 :reverse  bool    False
 
 rtype: self"""
-        self.__load_from_file()
         if not self.__is_all_keys_same_type(self.__dictionary):
             raise NotSameTypeError('Config cannot be sorted, finds different types')
 
@@ -291,7 +290,7 @@ rtype: dict"""
         srt = self.__sorted_dict(self.__inverted(self.__dictionary), key=key, reverse=reverse)
         return self.__inverted(srt)
 
-    def sort_by_values(self, key: Union[Callable, None] = None, reverse: Union[bool, None] = False) -> object:
+    def sort_by_values(self, key: Union[Callable, None] = None, reverse: Union[bool, None] = False):
         """self.sort_by_values(self, key=None, reverse=False)
 Sorts config by values
 Raises NotSameTypeError if values not same type
@@ -302,7 +301,6 @@ kwarg:    type:   default:
 :reverse  bool    False
 
 rtype: self"""
-        self.__load_from_file()
         if not self.__is_all_values_same_type(self.__dictionary):
             raise NotSameTypeError("Config cannot be sorted, finds different types")
         if self.__is_are_repetitions_in_values(self.__dictionary):
@@ -321,6 +319,13 @@ rtype: self"""
     def filtered_by_keys(self, key: Union[Callable, None] = None) -> dict:
         """ """
         self.__load_from_file()
+        return self.__filtered_dict(self.__dictionary, key=key)
+
+    def filter_by_keys(self, key: Union[Callable, None] = None):
+        """ """
+        self.__dictionary = self.filtered_by_keys(key=key)
+        self.__save_json()
+        return self
 
     def __len__(self) -> int:
         """len(self)
