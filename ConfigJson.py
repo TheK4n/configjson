@@ -312,23 +312,48 @@ rtype: self"""
 
     @staticmethod
     def __filtered_dict(dictionary_: dict, key: Union[Callable, None] = None) -> dict:
-        """ """
+        """self.__filtered_dict(dictionary_, key=None)
+Returns filtered dict by keys
+
+kwarg:    type:   default:
+:key      func    None
+
+rtype: dict"""
         fltr = filter(key, dictionary_.keys())
         return {i: dictionary_[i] for i in fltr}
 
     def filtered_by_keys(self, key: Union[Callable, None] = None) -> dict:
-        """ """
+        """self.filtered_by_keys(self, key=None, reverse=False)
+Returns filtered config by keys
+
+kwarg:    type:   default:
+:key      func    None
+
+rtype: dict"""
         self.__load_from_file()
         return self.__filtered_dict(self.__dictionary, key=key)
 
     def filter_by_keys(self, key: Union[Callable, None] = None):
-        """ """
+        """self.filter_by_keys(self, key=None)
+Filter config by keys
+
+kwarg:    type:   default:
+:key      func    None
+
+rtype: self"""
         self.__dictionary = self.filtered_by_keys(key=key)
         self.__save_json()
         return self
 
     def filtered_by_values(self, key: Union[Callable, None] = None) -> dict:
-        """ """
+        """self.filtered_by_values(self, key=None)
+Returns filtered dict by values
+Raises RepetitionsError if values has repetitions
+
+kwarg:    type:   default:
+:key      func    None
+
+rtype: dict"""
         self.__load_from_file()
         if self.__is_are_repetitions_in_values(self.__dictionary):
             raise RepetitionsError('Config cannot be filtered, finds repetitions in values')
@@ -336,7 +361,14 @@ rtype: self"""
         return self.__inverted(fltr)
 
     def filter_by_values(self, key: Union[Callable, None] = None):
-        """ """
+        """self.filter_by_values(self, key=None)
+Filter dict by values
+Raises RepetitionsError if values has repetitions
+
+kwarg:    type:   default:
+:key      func    None
+
+rtype: self"""
         self.__dictionary = self.filtered_by_values(key=key)
         self.__save_json()
         return self
