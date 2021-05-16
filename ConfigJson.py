@@ -335,6 +335,11 @@ rtype: self"""
         fltr = self.__filtered_dict(self.__inverted(self.__dictionary), key=key)
         return self.__inverted(fltr)
 
+    def filter_by_values(self, key: Union[Callable, None] = None):
+        """ """
+        self.__dictionary = self.filtered_by_values(key=key)
+        self.__save_json()
+        return self
 
     def __len__(self) -> int:
         """len(self)
