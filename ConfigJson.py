@@ -312,6 +312,16 @@ rtype: self"""
         self.__save_json()
         return self
 
+    @staticmethod
+    def __filtered_dict(dictionary_: dict, key: Union[Callable, None] = None) -> dict:
+        """ """
+        fltr = filter(key, dictionary_.keys())
+        return {i: dictionary_[i] for i in fltr}
+
+    def filtered_by_keys(self, key: Union[Callable, None] = None) -> dict:
+        """ """
+        self.__load_from_file()
+
     def __len__(self) -> int:
         """len(self)
 Returns length of dictionary
