@@ -41,9 +41,11 @@ if __name__ == '__main__':
     print(cfg.filtered_by_keys(lambda x: x[0] == 'a'))
     print(cfg.filtered_by_values(lambda x: str(x)[0] == '1'))
 
-    print(cfg + {'test+': 1})
+    print(cfg + ('test+', 1))
 
-    print(cfg & {'z': 2, 'az': 3123, 'a': 1, 'pin': 3, 'new_test':1245125})
+    print(cfg & {'z': 2, 'az': 3123, 'a': 1, 'pin': 3, 'new_test': 1245125})
 
-    print(cfg | {'z': 2, 'az': 3123, 'a': 1, 'pin': 3, 'new_test':1245125})
+    print(cfg | {'z': 2, 'az': 3123, 'a': 1, 'pin': 3, 'new_test': 1245125})
 
+    cfg += ['+=', 1]
+    print(cfg)

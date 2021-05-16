@@ -410,11 +410,19 @@ Returns list of tuples with key, value, ex:
 rtype: list"""
         return self.__dictionary.items()
 
-    def __add__(self, other: dict) -> dict:
+    def __add__(self, other: Union[tuple[Any, Any], list[Any, Any]]) -> dict:
         """ """
         self.__load_from_file()
         new_dict = self.__dictionary.copy()
-        new_dict.update(other)
+        new_dict.update({other[0]: other[1]})
+        return new_dict
+
+    def __iadd__(self, other: Union[tuple[Any, Any], list[Any, Any]]):
+        """ """
+        self.__load_from_file()
+        new_dict = self.__dictionary.copy()
+        new_dict.update({other[0]: other[1]})
+        self.__save_json()
         return new_dict
 
     def __and__(self, other: dict) -> dict:
