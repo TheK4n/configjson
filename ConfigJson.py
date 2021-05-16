@@ -73,8 +73,6 @@ kwarg:        type:
 :dictionary_  dict
 
 rtype: self"""
-        if not isinstance(dictionary_, dict):
-            raise TypeError('<dictionary_> must be dict')
         self.__load_from_file()
         self.__dictionary.update(dictionary_)
         self.__save_json()
@@ -88,8 +86,6 @@ kwarg:        type:
 :dictionary_  dict
 
 rtype: self"""
-        if not isinstance(dictionary_, dict):
-            raise TypeError('<dictionary_> must be dict')
         self.__dictionary = dictionary_
         self.__save_json()
         return self
@@ -332,15 +328,15 @@ Returns tuple of key, value every iteration
         self.__load_from_file()
         return iter(self.__dictionary.items())
 
-    def __contains__(self, item) -> bool:
+    def __contains__(self, item: Any) -> bool:
         """if item in self:
-Returns True if config contains items
+Returns True if config contains key
 
 kwarg:    type:
 :item     Any
 
 rtype: bool"""
-        if item in self.__dictionary:
+        if item in self.__dictionary.keys():
             return True
         else:
             return False
