@@ -327,6 +327,15 @@ rtype: self"""
         self.__save_json()
         return self
 
+    def filtered_by_values(self, key: Union[Callable, None] = None) -> dict:
+        """ """
+        self.__load_from_file()
+        if self.__is_are_repetitions_in_values(self.__dictionary):
+            raise RepetitionsError('Config cannot be filtered, finds repetitions in values')
+        fltr = self.__filtered_dict(self.__inverted(self.__dictionary), key=key)
+        return self.__inverted(fltr)
+
+
     def __len__(self) -> int:
         """len(self)
 Returns length of dictionary

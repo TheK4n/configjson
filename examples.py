@@ -37,3 +37,6 @@ if __name__ == '__main__':
         print(f'[X] {type(e).__name__}: {e}')
     except RepetitionsError as e:
         print(f'[X] {type(e).__name__}: {e}')
+
+    print(cfg.filtered_by_keys(lambda x: x[0] == 'a'))
+    print(cfg.filtered_by_values(lambda x: str(x)[0] == '1'))
