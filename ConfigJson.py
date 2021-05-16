@@ -23,8 +23,8 @@ kwarg:          type:      default:   doc:
 if the variable __json_filename is None, then the dictionary is not written to the file,
 but stored in the instance attribute"""
 
-    def __init__(self, json_filename: Union[None, str] = None, indent: Union[None, int] = 2,
-                 ensure_ascii: Union[None, bool] = False):
+    def __init__(self, json_filename: Optional[str] = None, indent: Optional[int] = 2,
+                 ensure_ascii: Optional[bool] = False):
 
         if not isinstance(json_filename, (str, type(None))):
             raise TypeError('<json_filename> must be str or None')
@@ -224,7 +224,7 @@ Returns False if dict values not same type
         return True
 
     @staticmethod
-    def __sorted_dict(dictionary_: dict, key: Union[Callable, None] = None, reverse: Union[bool, None] = False) -> dict:
+    def __sorted_dict(dictionary_: dict, key: Optional[Callable] = None, reverse: Optional[bool] = False) -> dict:
         """self.__sorted_dict(dictionary_, key=None, reverse=False)
 Returns sorted dict by keys
 
@@ -237,7 +237,7 @@ rtype: dict"""
         srt = sorted(dictionary_.keys(), key=key, reverse=reverse)
         return {i: dictionary_[i] for i in srt}
 
-    def sorted_by_keys(self, key: Union[Callable, None] = None, reverse: Union[bool, None] = False) -> dict:
+    def sorted_by_keys(self, key: Optional[Callable] = None, reverse: Optional[bool] = False) -> dict:
         """self.sorted_by_keys(self, key=None, reverse=False)
 Returns sorted config by keys
 Raises NotSameTypeError if keys not same type
@@ -253,7 +253,7 @@ rtype: dict"""
 
         return self.__sorted_dict(self.__dictionary, key=key, reverse=reverse)
 
-    def sort_by_keys(self, key: Union[Callable, None] = None, reverse: Union[bool, None] = False):
+    def sort_by_keys(self, key: Optional[Callable] = None, reverse: Optional[bool] = False):
         """self.sort_by_keys(self, key=None, reverse=False)
 Sorts config by keys
 Raises NotSameTypeError if keys not same type
@@ -270,7 +270,7 @@ rtype: self"""
         self.__save_json()
         return self
 
-    def sorted_by_values(self, key: Union[Callable, None] = None, reverse: Union[bool, None] = False) -> dict:
+    def sorted_by_values(self, key: Optional[Callable] = None, reverse: Optional[bool] = False) -> dict:
         """self.sorted_by_values(self, key=None, reverse=False)
 Returns sorted config by values
 Raises NotSameTypeError if values not same type
@@ -290,7 +290,7 @@ rtype: dict"""
         srt = self.__sorted_dict(self.__inverted(self.__dictionary), key=key, reverse=reverse)
         return self.__inverted(srt)
 
-    def sort_by_values(self, key: Union[Callable, None] = None, reverse: Union[bool, None] = False):
+    def sort_by_values(self, key: Optional[Callable] = None, reverse: Optional[bool] = False):
         """self.sort_by_values(self, key=None, reverse=False)
 Sorts config by values
 Raises NotSameTypeError if values not same type
@@ -311,7 +311,7 @@ rtype: self"""
         return self
 
     @staticmethod
-    def __filtered_dict(dictionary_: dict, key: Union[Callable, None] = None) -> dict:
+    def __filtered_dict(dictionary_: dict, key: Optional[Callable] = None) -> dict:
         """self.__filtered_dict(dictionary_, key=None)
 Returns filtered dict by keys
 
@@ -322,7 +322,7 @@ rtype: dict"""
         fltr = filter(key, dictionary_.keys())
         return {i: dictionary_[i] for i in fltr}
 
-    def filtered_by_keys(self, key: Union[Callable, None] = None) -> dict:
+    def filtered_by_keys(self, key: Optional[Callable] = None) -> dict:
         """self.filtered_by_keys(self, key=None, reverse=False)
 Returns filtered config by keys
 
@@ -333,7 +333,7 @@ rtype: dict"""
         self.__load_from_file()
         return self.__filtered_dict(self.__dictionary, key=key)
 
-    def filter_by_keys(self, key: Union[Callable, None] = None):
+    def filter_by_keys(self, key: Optional[Callable] = None):
         """self.filter_by_keys(self, key=None)
 Filter config by keys
 
@@ -345,7 +345,7 @@ rtype: self"""
         self.__save_json()
         return self
 
-    def filtered_by_values(self, key: Union[Callable, None] = None) -> dict:
+    def filtered_by_values(self, key: Optional[Callable] = None) -> dict:
         """self.filtered_by_values(self, key=None)
 Returns filtered dict by values
 Raises RepetitionsError if values has repetitions
@@ -360,7 +360,7 @@ rtype: dict"""
         fltr = self.__filtered_dict(self.__inverted(self.__dictionary), key=key)
         return self.__inverted(fltr)
 
-    def filter_by_values(self, key: Union[Callable, None] = None):
+    def filter_by_values(self, key: Optional[Callable] = None):
         """self.filter_by_values(self, key=None)
 Filter dict by values
 Raises RepetitionsError if values has repetitions
