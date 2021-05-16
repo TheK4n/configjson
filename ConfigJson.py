@@ -409,3 +409,22 @@ Returns list of tuples with key, value, ex:
 
 rtype: list"""
         return self.__dictionary.items()
+
+    def __add__(self, other: dict) -> dict:
+        """ """
+        self.__load_from_file()
+        new_dict = self.__dictionary.copy()
+        new_dict.update(other)
+        return new_dict
+
+    def __and__(self, other: dict) -> dict:
+        """ """
+        self.__load_from_file()
+        return {i: self.__dictionary[i] for i in other if i in self.__dictionary}
+
+    def __or__(self, other: dict) -> dict:
+        """ """
+        self.__load_from_file()
+        new_dict = self.__dictionary.copy()
+        new_dict.update(other)
+        return new_dict
