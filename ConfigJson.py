@@ -37,7 +37,26 @@ Checks dict for different types"""
 
 
 class RepetitionsError(Exception):
-    pass
+    def __init__(self, dictionary_: dict, message: Optional[str] = None):
+        self.dictionary_ = dictionary_
+        self.message = message
+
+        # переопределяется конструктор встроенного класса `Exception()`
+        super().__init__(self.message)
+
+    def find_repetitions(self) -> list:
+
+        count_reps = Counter(self.dictionary_.values()).most_common()
+        lst = [f'Value <{i[0]}> repeated {i[1]} times' for i in count_reps if i[1] > 1]
+
+        return lst
+
+    def __str__(self):
+        lst = self.find_repetitions()
+        if self.message is not None:
+            return f'{self.message}, {". ".join(lst)}'
+        else:
+            return ". ".join(lst)
 
 
 class configjson:
@@ -200,7 +219,7 @@ Returns dictionary replaced keys with values and values with keys
 rtype: dict"""
         self.__load_from_file()
         if self.__is_are_repetitions_in_values(self.__dictionary):
-            raise RepetitionsError('Config cannot be inverted, finds repetitions in values')
+            raise RepetitionsError(self.__dictionary, 'Config cannot be inverted')
         return self.__inverted(self.__dictionary)
 
     def pop(self, key: Any, default: Any = None) -> Any:
@@ -315,7 +334,7 @@ rtype: dict"""
         if not self.__is_all_values_same_type(self.__dictionary):
             raise NotSameTypeError(self.__dictionary, 'Config cannot be sorted')
         if self.__is_are_repetitions_in_values(self.__dictionary):
-            raise RepetitionsError('Config cannot be sorted, finds repetitions in values')
+            raise RepetitionsError(self.__dictionary, 'Config cannot be sorted')
 
         srt = self.__sorted_dict(self.__inverted(self.__dictionary), key=key, reverse=reverse)
         return self.__inverted(srt)
@@ -334,7 +353,7 @@ rtype: self"""
         if not self.__is_all_values_same_type(self.__dictionary):
             raise NotSameTypeError(self.__dictionary, "Config cannot be sorted")
         if self.__is_are_repetitions_in_values(self.__dictionary):
-            raise RepetitionsError('Config cannot be sorted, finds repetitions in values')
+            raise RepetitionsError(self.__dictionary, 'Config cannot be sorted')
 
         self.__dictionary = self.sorted_by_values(key=key, reverse=reverse)
         self.__save_json()
@@ -386,7 +405,7 @@ kwarg:    type:   default:
 rtype: dict"""
         self.__load_from_file()
         if self.__is_are_repetitions_in_values(self.__dictionary):
-            raise RepetitionsError('Config cannot be filtered, finds repetitions in values')
+            raise RepetitionsError(self.__dictionary, 'Config cannot be filtered')
         filtered = self.__filtered_dict(self.__inverted(self.__dictionary), key=key)
         return self.__inverted(filtered)
 
