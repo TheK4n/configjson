@@ -415,15 +415,14 @@ rtype: list"""
         self.__load_from_file()
         new_dict = self.__dictionary.copy()
         new_dict.update({other[0]: other[1]})
-        return new_dict
+        return dict
 
     def __iadd__(self, other: Union[tuple[Any, Any], list[Any, Any]]):
         """ """
         self.__load_from_file()
-        new_dict = self.__dictionary.copy()
-        new_dict.update({other[0]: other[1]})
+        self.__dictionary.update({other[0]: other[1]})
         self.__save_json()
-        return new_dict
+        return self
 
     def __and__(self, other: dict) -> dict:
         """ """
