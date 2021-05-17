@@ -16,12 +16,11 @@ Checks dict for different types"""
         dict_values = self.dictionary_.values()
         types = [type(i) for i in dict_values]
 
-        count_types = Counter(types)
-        less_common_type = count_types.most_common()[-1][0]
+        less_common_type = Counter(types).most_common()[-1][0]
 
         val = list(dict_values)[list(types).index(less_common_type)]
 
-        key = None
+        key = '[NF]'
         for k, v in self.dictionary_.items():
             if v == val:
                 key = k
