@@ -350,8 +350,8 @@ kwarg:    type:   default:
 :key      func    None
 
 rtype: dict"""
-        fltr = filter(key, dictionary_.keys())
-        return {i: dictionary_[i] for i in fltr}
+        filtered = filter(key, dictionary_.keys())
+        return {i: dictionary_[i] for i in filtered}
 
     def filtered_by_keys(self, key: Optional[Callable] = None) -> dict:
         """self.filtered_by_keys(self, key=None, reverse=False)
@@ -388,8 +388,8 @@ rtype: dict"""
         self.__load_from_file()
         if self.__is_are_repetitions_in_values(self.__dictionary):
             raise RepetitionsError('Config cannot be filtered, finds repetitions in values')
-        fltr = self.__filtered_dict(self.__inverted(self.__dictionary), key=key)
-        return self.__inverted(fltr)
+        filtered = self.__filtered_dict(self.__inverted(self.__dictionary), key=key)
+        return self.__inverted(filtered)
 
     def filter_by_values(self, key: Optional[Callable] = None):
         """self.filter_by_values(self, key=None)
