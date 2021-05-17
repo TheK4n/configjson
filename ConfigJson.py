@@ -415,7 +415,7 @@ rtype: list"""
         self.__load_from_file()
         new_dict = self.__dictionary.copy()
         new_dict.update({other[0]: other[1]})
-        return dict
+        return new_dict
 
     def __iadd__(self, other: Union[tuple[Any, Any], list[Any, Any]]):
         """ """
