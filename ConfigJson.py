@@ -3,7 +3,38 @@ from typing import *
 
 
 class NotSameTypeError(Exception):
-    pass
+    """NotSameTypeError(dictionary_, message)
+Checks dict for different types"""
+    def __init__(self, dictionary_: dict, message: Optional[str] = None):
+        self.dictionary_ = dictionary_
+        self.message = message
+
+        # переопределяется конструктор встроенного класса `Exception()`
+        super().__init__(self.message)
+
+    def find_other_type(self) -> tuple:
+        dict_values = self.dictionary_.values()
+        types = [type(i) for i in dict_values]
+
+        count_types = Counter(types)
+        less_common_type = count_types.most_common()[-1][0]
+
+        val = list(dict_values)[list(types).index(less_common_type)]
+
+        key = None
+        for k, v in self.dictionary_.items():
+            if v == val:
+                key = k
+                break
+
+        return less_common_type, key, val
+
+    def __str__(self):
+        t, k, v = self.find_other_type()
+        if self.message is not None:
+            return f'{self.message}, find other type {t} with key <{k}: {v}>'
+        else:
+            return f'Find other type {t} with key <{k}: {v}>'
 
 
 class RepetitionsError(Exception):
@@ -249,7 +280,7 @@ kwarg:    type:   default:
 rtype: dict"""
         self.__load_from_file()
         if not self.__is_all_keys_same_type(self.__dictionary):
-            raise NotSameTypeError('Config cannot be sorted, finds different types')
+            raise NotSameTypeError(self.__dictionary, 'Config cannot be sorted')
 
         return self.__sorted_dict(self.__dictionary, key=key, reverse=reverse)
 
@@ -264,7 +295,7 @@ kwarg:    type:   default:
 
 rtype: self"""
         if not self.__is_all_keys_same_type(self.__dictionary):
-            raise NotSameTypeError('Config cannot be sorted, finds different types')
+            raise NotSameTypeError(self.__dictionary, 'Config cannot be sorted')
 
         self.__dictionary = self.sorted_by_keys(key=key, reverse=reverse)
         self.__save_json()
@@ -283,7 +314,7 @@ kwarg:    type:   default:
 rtype: dict"""
         self.__load_from_file()
         if not self.__is_all_values_same_type(self.__dictionary):
-            raise NotSameTypeError('Config cannot be sorted, finds different types')
+            raise NotSameTypeError(self.__dictionary, 'Config cannot be sorted')
         if self.__is_are_repetitions_in_values(self.__dictionary):
             raise RepetitionsError('Config cannot be sorted, finds repetitions in values')
 
@@ -302,7 +333,7 @@ kwarg:    type:   default:
 
 rtype: self"""
         if not self.__is_all_values_same_type(self.__dictionary):
-            raise NotSameTypeError("Config cannot be sorted, finds different types")
+            raise NotSameTypeError(self.__dictionary, "Config cannot be sorted")
         if self.__is_are_repetitions_in_values(self.__dictionary):
             raise RepetitionsError('Config cannot be sorted, finds repetitions in values')
 
