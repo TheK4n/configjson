@@ -57,9 +57,7 @@ arg:          type:   default:
     def find_repetitions(self) -> list:
 
         count_reps = Counter(self.dictionary_.values()).most_common()
-        lst = [f'Value <{i[0]}> repeated {i[1]} times' for i in count_reps if i[1] > 1]
-
-        return lst
+        return [f'Value <{i[0]}> repeated {i[1]} times' for i in count_reps if i[1] > 1]
 
     def __str__(self):
         lst = self.find_repetitions()
@@ -471,26 +469,30 @@ rtype: list"""
         return self.__dictionary.items()
 
     def __add__(self, other: Union[tuple[Any, Any], list[Any, Any]]) -> dict:
-        """ """
+        """self + tuple(key, value)
+Returns updated dict with tuple(key, value)"""
         self.__load_from_file()
         new_dict = self.__dictionary.copy()
         new_dict.update({other[0]: other[1]})
         return new_dict
 
     def __iadd__(self, other: Union[tuple[Any, Any], list[Any, Any]]):
-        """ """
+        """self += tuple(key, value)
+Update config with tuple(key, value)"""
         self.__load_from_file()
         self.__dictionary.update({other[0]: other[1]})
         self.__save_json()
         return self
 
     def __and__(self, other: dict) -> dict:
-        """ """
+        """self & dict
+Returns dict with values in self.__dictionary and in new dict"""
         self.__load_from_file()
         return {i: self.__dictionary[i] for i in other if i in self.__dictionary}
 
     def __or__(self, other: dict) -> dict:
-        """ """
+        """self | dict
+Returns updated dict"""
         self.__load_from_file()
         new_dict = self.__dictionary.copy()
         new_dict.update(other)
