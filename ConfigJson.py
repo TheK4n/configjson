@@ -1,6 +1,6 @@
 from json import load as json_load, dump as json_dump
 from typing import *
-from Exceptions import *
+from exceptions import *
 
 
 class configjson:

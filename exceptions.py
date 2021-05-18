@@ -35,9 +35,9 @@ arg:          type:   default:
     def __str__(self):
         t, k, v = self.find_other_type()
         if self.message is not None:
-            return f'{self.message}, find other type {t} with key <{k}: {v}>'
+            return f'{self.message}, expected other type {t} with key <{k}: {v}>'
         else:
-            return f'Find other type {t} with key <{k}: {v}>'
+            return f'Expected other type {t} with key <{k}: {v}>'
 
 
 class RepetitionsError(Exception):
