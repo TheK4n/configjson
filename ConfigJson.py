@@ -82,7 +82,7 @@ kwarg:          type:      default:   doc:
 if the variable __json_filename is None, then the dictionary is not written to the file,
 but stored in the instance attribute"""
 
-    def __init__(self, *, json_filename: Optional[str] = None, indent: Optional[int] = 2,
+    def __init__(self, json_filename: Optional[str] = None, *, indent: Optional[int] = 2,
                  ensure_ascii: Optional[bool] = False):
 
         if not isinstance(json_filename, (str, type(None))):
