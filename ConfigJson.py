@@ -1,5 +1,4 @@
 from json import load as json_load, dump as json_dump
-from typing import *
 from exceptions import *
 
 
@@ -33,7 +32,7 @@ but stored in the instance attribute"""
         self.__dictionary = {}
         self.__save_json()
 
-    def __load_from_file(self):  # вызвается для обновления атрибута __dictionary из json объекта
+    def __load_from_file(self):  # вызывается для обновления атрибута __dictionary из json объекта
         """Loads json object to dictionary"""
         if self.__json_filename is None:
             return

@@ -50,3 +50,4 @@ if __name__ == '__main__':
     cfg += ['+=', 1]
     print(cfg)
     print(type(cfg))
+    print(cfg.upd.__doc__)
