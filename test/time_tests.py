@@ -2,6 +2,7 @@ from timeit import timeit
 
 from ConfigJson import *
 
+
 cfg = configjson()
 
 
