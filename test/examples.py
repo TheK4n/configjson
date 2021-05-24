@@ -3,7 +3,7 @@ if __name__ == '__main__':
 
     CONFIG_FILENAME = None
     # CONFIG_FILENAME = 'test.json'
-    cfg = configjson(CONFIG_FILENAME)
+    cfg = ConfigJson(CONFIG_FILENAME)
 
     g = cfg(
         z=2,

@@ -2,7 +2,7 @@ from json import load as json_load, dump as json_dump
 from source.exceptions import *
 
 
-class configjson:
+class ConfigJson:
     """configjson()
 Works with config files with json format
 configjson(self, json_filename=None, indent=2, ensure_ascii=False)

@@ -2,10 +2,10 @@ import unittest
 
 from ConfigJson import *
 
-with_repetitions_no_diff_types = configjson()
-no_repetitions_diff_types = configjson()
-repetitions_diff_types = configjson()
-cfg = configjson()
+with_repetitions_no_diff_types = ConfigJson()
+no_repetitions_diff_types = ConfigJson()
+repetitions_diff_types = ConfigJson()
+cfg = ConfigJson()
 
 wr = with_repetitions_no_diff_types(
     z=2,
@@ -45,7 +45,7 @@ class TestStringMethods(unittest.TestCase):
     def test_return_types(self):
         self.assertIsInstance(cfg.get(), dict)
         self.assertIsInstance(~cfg, dict)
-        self.assertIsInstance(cfg, configjson)
+        self.assertIsInstance(cfg, ConfigJson)
 
     def test_equal(self):
         self.assertEqual(g, cfg.get())
