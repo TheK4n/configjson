@@ -1,5 +1,5 @@
 if __name__ == '__main__':
-    from ConfigJson.ConfigJson import *
+    from ConfigJson import *
 
     CONFIG_FILENAME = None
     # CONFIG_FILENAME = 'test.json'

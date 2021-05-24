@@ -1,13 +1,13 @@
 from timeit import timeit
 
-from source.ConfigJson import *
+from ConfigJson import *
 
 
 cfg = ConfigJson()
 
 
 def main():
-    print(timeit("cfg = configjson()", number=100_000, globals=globals()))
+    print(timeit("cfg = ConfigJson()", number=100_000, globals=globals()))
     print(timeit("cfg(z=2, az=3123, b=121243, a=1, pin=3, hash=1124, xuy=16)", number=100_000, globals=globals()))
     print(timeit("cfg.get()", number=100_000, globals=globals()))
     print(timeit("cfg", number=100_000, globals=globals()))
