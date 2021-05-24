@@ -1,6 +1,6 @@
 import unittest
 
-from ConfigJson import *
+from source.ConfigJson import *
 
 with_repetitions_no_diff_types = ConfigJson()
 no_repetitions_diff_types = ConfigJson()
