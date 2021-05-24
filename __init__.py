@@ -1,3 +1,3 @@
-from ConfigJson.ConfigJson import *
+from source.ConfigJson import *
 
 __version__ = "1.0"
