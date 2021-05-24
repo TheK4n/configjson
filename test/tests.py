@@ -38,6 +38,10 @@ g = cfg(
 
 class TestStringMethods(unittest.TestCase):
 
+    def tearDown(self):
+        """Closing"""
+        pass
+
     def test_return_types(self):
         self.assertIsInstance(cfg.get(), dict)
         self.assertIsInstance(~cfg, dict)
