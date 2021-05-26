@@ -10,24 +10,20 @@
 
 <a id="chapter-1"></a>
 ## Примеры
-**cfg = configjson(<_CONFIG_FILENAME_>)** - Определение экземпляра класса\
+**cfg = ConfigJson(<_CONFIG_FILENAME_>)** - Определение экземпляра класса\
 Если _CONFIG_FILENAME_ - None, то json объект не создается, а хранится в атрибуте класса
 
-
-    from PIL import Image
-    import glob, os
-
-    size = 128, 128
-
-    for infile in glob.glob("*.jpg"):
-        file, ext = os.path.splitext(infile)
-        with Image.open(infile) as im:
-            im.thumbnail(size)
-            im.save(file + ".thumbnail", "JPEG")
-            
 - **cfg(key='value')** - Создание словаря
 - **cfg['key']** - Обращение к словарю по ключу
 - **help(cfg)** - Помощь по классу
+
+.. code-block:: python
+    
+    from ConfigJson import ConfigJson
+    cfg = ConfigJson()
+    cfg(val1=1, val2=2, val3=3)
+    print(cfg['val1'])
+    
 
 <a id="chapter-2"></a>
 ## Документация
