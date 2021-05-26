@@ -17,13 +17,12 @@
 - **cfg['key']** - Обращение к словарю по ключу
 - **help(cfg)** - Помощь по классу
 
-.. code-block:: python
-    
-    from ConfigJson import ConfigJson
-    cfg = ConfigJson()
-    cfg(val1=1, val2=2, val3=3)
-    print(cfg['val1'])
-    
+```python
+from ConfigJson import ConfigJson
+cfg = ConfigJson()
+cfg(val1=1, val2=2, val3=3)
+print(cfg['val1'])  # 1
+```
 
 <a id="chapter-2"></a>
 ## Документация
