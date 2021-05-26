@@ -13,7 +13,6 @@
 **cfg = configjson(<_CONFIG_FILENAME_>)** - Определение экземпляра класса\
 Если _CONFIG_FILENAME_ - None, то json объект не создается, а хранится в атрибуте класса
 
-.. code-block:: python
 
     from PIL import Image
     import glob, os
