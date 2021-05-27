@@ -33,17 +33,17 @@ but stored in the instance attribute"""
         self.__dictionary = {}
         self.__save_json()
 
-    def __load_from_file(self):  # вызывается для обновления атрибута __dictionary из json объекта
+    def __load_from_file(self) -> None:  # вызывается для обновления атрибута __dictionary из json объекта
         """Loads json object to dictionary"""
         if self.__json_filename is None:
             return
         try:
-            with open(self.__json_filename) as file:
+            with open(self.__json_filename, 'r') as file:
                 self.__dictionary = json_load(file)
         except FileNotFoundError:
             self.__dictionary = {}
 
-    def __save_json(self):  # записывает в json объект
+    def __save_json(self) -> None:  # записывает в json объект
         """Dumps dictionary to config"""
         if self.__json_filename is None:
             return
@@ -111,7 +111,7 @@ rtype: self"""
         self.__load_from_file()
         return self.__dictionary[key]
 
-    def __setitem__(self, key: Any, val: Any):
+    def __setitem__(self, key: Any, val: Any) -> None:
         """self[key] = value
 Sets value in config
 
@@ -124,7 +124,7 @@ rtype: Nonetype"""
         self.__dictionary[key] = val
         self.__save_json()
 
-    def __delitem__(self, key: Any):
+    def __delitem__(self, key: Any) -> None:
         """del self[key]
 Deletes key from config
 
