@@ -16,7 +16,7 @@ arg:          type:   default:
         # переопределяется конструктор встроенного класса `Exception()`
         super().__init__(self.message)
 
-    def find_other_type(self) -> tuple:
+    def __find_other_type(self) -> tuple:
         dict_values = self.dictionary_.values()
         types = [type(i) for i in dict_values]
 
@@ -33,7 +33,7 @@ arg:          type:   default:
         return less_common_type, key, val
 
     def __str__(self):
-        t, k, v = self.find_other_type()
+        t, k, v = self.__find_other_type()
         if self.message is not None:
             return f'{self.message}, expected other type {t} with key <{k}: {v}>'
         else:
@@ -55,13 +55,13 @@ arg:          type:   default:
         # переопределяется конструктор встроенного класса `Exception()`
         super().__init__(self.message)
 
-    def find_repetitions(self) -> list:
+    def __find_repetitions(self) -> list:
 
         count_reps = Counter(self.dictionary_.values()).most_common()
         return [f'Value <{i[0]}> repeated {i[1]} times' for i in count_reps if i[1] > 1]
 
     def __str__(self):
-        lst = self.find_repetitions()
+        lst = self.__find_repetitions()
         if self.message is not None:
             return f'{self.message}, {". ".join(lst)}'
         else:
