@@ -18,7 +18,7 @@
 - **help(cfg)** - Помощь по классу
 
 ```python
-from ConfigJson import ConfigJson
+from configjson import ConfigJson
 cfg = ConfigJson()
 cfg(val1=1, val2=2, val3=3)
 print(cfg['val1'])  # 1
