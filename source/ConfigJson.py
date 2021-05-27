@@ -27,7 +27,7 @@ but stored in the instance attribute"""
             raise TypeError('<ensure_ascii> must be bool or None')
 
         self.__json_filename = json_filename  # Если self.__json_filename - None, то dict не записывается
-        self.__indent = indent  # в файл,а хранится в атрибуте экземляра класса
+        self.__indent = indent  # в файл,а хранится в атрибуте экземпляра класса
         self.__ensure_ascii = ensure_ascii
 
         self.__dictionary = {}
