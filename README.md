@@ -10,12 +10,19 @@
 
 <a id="chapter-1"></a>
 ## Примеры
-**cfg = configjson(<_CONFIG_FILENAME_>)** - Определение экземпляра класса\
+**cfg = ConfigJson(<_CONFIG_FILENAME_>)** - Определение экземпляра класса\
 Если _CONFIG_FILENAME_ - None, то json объект не создается, а хранится в атрибуте класса
 
 - **cfg(key='value')** - Создание словаря
 - **cfg['key']** - Обращение к словарю по ключу
 - **help(cfg)** - Помощь по классу
+
+```python
+from configjson import ConfigJson
+cfg = ConfigJson()
+cfg(val1=1, val2=2, val3=3)
+print(cfg['val1'])  # 1
+```
 
 <a id="chapter-2"></a>
 ## Документация
