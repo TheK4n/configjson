@@ -167,7 +167,7 @@ rtype: dict"""
             raise RepetitionsError(self.__dictionary, 'Config cannot be inverted')
         return self.__inverted(self.__dictionary)
 
-    def pop(self, key: Any, default: Any = None) -> Any:
+    def pop(self, key: Any, default: Optional[Any] = None) -> Any:
         """self.pop(self, key, default = None)
 Returns value from dict and deletes key from config
 if KeyError - returns default
