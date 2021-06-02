@@ -1,8 +1,11 @@
-if __name__ == '__main__':
-    from source.ConfigJson import *
 
-    CONFIG_FILENAME = None
-    # CONFIG_FILENAME = 'test.json'
+from src.ConfigJson import *
+CONFIG_FILENAME = None
+# CONFIG_FILENAME = 'test.json'
+
+
+def main():
+
     cfg = ConfigJson(CONFIG_FILENAME)
 
     g = cfg(
@@ -51,3 +54,7 @@ if __name__ == '__main__':
     print(cfg)
     print(type(cfg))
     print(cfg.upd.__doc__)
+
+
+if __name__ == '__main__':
+    main()

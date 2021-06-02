@@ -1,5 +1,5 @@
 import unittest
-from source.ConfigJson import *
+from src.ConfigJson import *
 
 
 class TestStringMethods(unittest.TestCase):

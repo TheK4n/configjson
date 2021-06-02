@@ -1,6 +1,6 @@
 from timeit import timeit
 
-from source.ConfigJson import *
+from src.ConfigJson import *
 
 
 cfg = ConfigJson()
