@@ -1,5 +1,5 @@
-
 from src.ConfigJson import *
+
 CONFIG_FILENAME = None
 # CONFIG_FILENAME = 'test.json'
 
