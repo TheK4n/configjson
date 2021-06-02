@@ -1,4 +1,5 @@
-from typing import *
+from typing import Optional
+from collections import Counter
 
 
 class NotSameTypeError(Exception):

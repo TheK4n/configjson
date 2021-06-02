@@ -1,6 +1,6 @@
 from json import load as json_load, dump as json_dump
 from source.exceptions import *
-from typing import *
+from typing import Optional, Callable, ItemsView, Iterable, Union, Any
 
 
 class ConfigJson:
