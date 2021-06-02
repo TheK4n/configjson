@@ -7,10 +7,10 @@ if __name__ == '__main__':
 
     g = cfg(
         z=2,
-        az=3123,
+        az=1,
         b=121243,
-        a=1,
-        pin=3,
+        a=4112,
+        pin=125125,
         hash='asd',
         xuy=16).get()
 

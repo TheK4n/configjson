@@ -58,11 +58,11 @@ arg:          type:   default:
     def __find_repetitions(self) -> list:
 
         count_reps = Counter(self.dictionary_.values()).most_common()
-        return [f'Value <{i[0]}> repeated {i[1]} times' for i in count_reps if i[1] > 1]
+        return [f'value <{i[0]}> repeated {i[1]} times' for i in count_reps if i[1] > 1]
 
     def __str__(self):
         lst = self.__find_repetitions()
         if self.message is not None:
-            return f'{self.message}, {". ".join(lst)}'
+            return f'{self.message}, {", ".join(lst)}'
         else:
             return ". ".join(lst)
