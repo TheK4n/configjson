@@ -8,10 +8,13 @@ class ConfigJson:
 Works with config files with json format
 configjson(self, json_filename=None, indent=2, ensure_ascii=False)
 
-kwarg:          type:      default:   doc:
-:json_filename  str        None       "Name of json file"
-:indent         int        2          "indent in json"
-:ensure_ascii   bool       False      "ensure ascii in json"
+
+:param json_filename: Name of json file
+:type json_filename: str
+:param indent: indent in json
+:type indent: int
+:param ensure_ascii: ensure ascii in json
+:type ensure_ascii: bool
 
 if the variable __json_filename is None, then the dictionary is not written to the file,
 but stored in the instance attribute"""
@@ -51,22 +54,23 @@ but stored in the instance attribute"""
             json_dump(self.__dictionary, file, indent=self.__indent, ensure_ascii=self.__ensure_ascii)
 
     def __call__(self, **params):
-        """self(key = value, other_key = other_value)
+        """self(key = value, other_key = other_value, ...)
 Manually updates config from key arguments
 
-rtype: self"""
+:returns: self
+:rtype: ConfigJson"""
         self.__dictionary.update(params)  # **params - dict
         self.__save_json()
         return self
 
     def upd(self, dictionary_: dict):
-        """self.upd(self, dictionary_)
+        """upd(self, dictionary_: dict)
 Updates config with dictionary
 
-arg:          type:
-:dictionary_  dict
-
-rtype: self"""
+:param dictionary_: dictionary
+:type dictionary_: dict
+:returns: self
+:rtype: ConfigJson"""
         self.__load_from_file()
         self.__dictionary.update(dictionary_)
         self.__save_json()
@@ -76,10 +80,10 @@ rtype: self"""
         """self.set(self, dictionary_)
 Sets config with dictionary
 
-arg:          type:
-:dictionary_  dict
-
-rtype: self"""
+:param dictionary_: dictionary
+:type dictionary_: dict
+:returns: self
+:rtype: ConfigJson"""
         self.__dictionary = dictionary_
         self.__save_json()
         return self
@@ -88,7 +92,8 @@ rtype: self"""
         """self.get(self)
 Returns dictionary from config
 
-rtype: dict"""
+:returns: dictionary from config
+:rtype: dict"""
         self.__load_from_file()
         return self.__dictionary.copy()
 
@@ -96,7 +101,8 @@ rtype: dict"""
         """print(self)
 Returns string representation of a dictionary
 
-rtype: str"""
+:returns: string representation of a dictionary
+:rtype: str"""
         self.__load_from_file()
         return repr(self.__dictionary)
 
@@ -104,22 +110,23 @@ rtype: str"""
         """self[key]
 Returns value from dict with key
 
-arg:    type:
-:key    Any
-
-rtype: self"""
+:param key: key in dict
+:type key: Any
+:returns: value with key
+:rtype: Any"""
         self.__load_from_file()
         return self.__dictionary[key]
 
     def __setitem__(self, key: Any, val: Any) -> None:
-        """self[key] = value
+        """self[key: Any] = value: Any
 Sets value in config
 
-arg:    type:
-:key    Any
-:val    Any
-
-rtype: Nonetype"""
+:param key: key in dict to update
+:type key: Any
+:param val: val in dict to update
+:type val: Any
+:returns: None
+:rtype: Nonetype"""
         self.__load_from_file()
         self.__dictionary[key] = val
         self.__save_json()
@@ -128,10 +135,10 @@ rtype: Nonetype"""
         """del self[key]
 Deletes key from config
 
-kwarg:  type:
-:key    Any
-
-rtype: Nonetype"""
+:param key: key to delete from dictionary
+:type key: Any
+:returns: None
+:rtype: NoneType"""
         self.__load_from_file()
         del self.__dictionary[key]
         self.__save_json()
@@ -141,7 +148,10 @@ rtype: Nonetype"""
         """__is_are_repetitions_in_values(dictionary_)
 Returns True if repetitions in dict values
 
-@rtype: bool"""
+:param dictionary_: dictionary to check
+:type dictionary_: dict
+:returns: True if repetitions in dict values
+:rtype: bool"""
         dict_values = list(dictionary_.values())
         while dict_values:
             i = dict_values.pop(0)
@@ -154,14 +164,18 @@ Returns True if repetitions in dict values
         """self.__inverted(dictionary_)
 Returns dictionary replaced keys with values and values with keys
 
-rtype: dict"""
+:param dictionary_: dictionary to check
+:type dictionary_: dict
+:returns: dictionary replaced keys with values and values with keys
+:rtype: dict"""
         return {v: k for k, v in dictionary_.items()}  # генератор словарей
 
     def __invert__(self) -> dict:
         """~self
 Returns dictionary replaced keys with values and values with keys
 
-rtype: dict"""
+:returns: dictionary replaced keys with values and values with keys
+:rtype: dict"""
         self.__load_from_file()
         if self.__is_are_repetitions_in_values(self.__dictionary):
             raise RepetitionsError(self.__dictionary, 'Config cannot be inverted')
@@ -172,11 +186,11 @@ rtype: dict"""
 Returns value from dict and deletes key from config
 if KeyError - returns default
 
-arg:      type:   default:
-:key      Any
-:default  Any     None
-
-rtype: object"""
+:param key: key to pop from dictionary
+:type key: Any
+:param default: value to return if KeyError
+:returns: value by key
+:rtype: Any"""
         self.__load_from_file()
         if default is not None:
             try:
@@ -194,7 +208,9 @@ rtype: object"""
         """__is_all_keys_same_type(_dictionary)
 Returns False if dict keys not same type
 
-@rtype: bool"""
+:param _dictionary: dictionary to check
+:type _dictionary: dict
+:rtype: bool"""
         dict_values = list(_dictionary.keys())
         while len(dict_values) > 1:
             zero = dict_values.pop(0)
@@ -208,7 +224,9 @@ Returns False if dict keys not same type
         """__is_all_values_same_type(_dictionary)
 Returns False if dict values not same type
 
-@rtype: bool"""
+:param _dictionary: dictionary to check
+:type _dictionary: dict
+:rtype: bool"""
         dict_values = list(_dictionary.values())
         while len(dict_values) > 1:
             zero = dict_values.pop(0)
@@ -222,41 +240,45 @@ Returns False if dict values not same type
         """self.__sorted_dict(dictionary_, key=None, reverse=False)
 Returns sorted dict by keys
 
-kwarg:        type:   default:
-:dictionary_  dict    None
-:key          func    None
-:reverse      bool    False
-
-rtype: dict"""
+:param dictionary_: dict to be sorted
+:type dictionary_: dict
+:param key: sorting function = None
+:type key: Callable
+:param reverse: reverse dictionary = False
+:type reverse: bool
+:returns: sorted dictionary by keys
+:rtype: dict"""
         srt = sorted(dictionary_.keys(), key=key, reverse=reverse)
         return {i: dictionary_[i] for i in srt}
 
-    def sorted_by_keys(self, *, key: Optional[Callable] = None, reverse: Optional[bool] = False) -> dict:
+    def sorted_by_keys(self, key: Optional[Callable] = None, reverse: Optional[bool] = False) -> dict:
         """self.sorted_by_keys(self, key=None, reverse=False)
 Returns sorted config by keys
-Raises NotSameTypeError if keys not same type
 
-kwarg:    type:   default:
-:key      func    None
-:reverse  bool    False
-
-rtype: dict"""
+:param key: sorting function = None
+:type key: Callable
+:param reverse: reverse dictionary = False
+:type reverse: bool
+:raises NotSameTypeError: if keys not same type
+:returns: sorted dictionary by keys
+:rtype: dict"""
         self.__load_from_file()
         if not self.__is_all_keys_same_type(self.__dictionary):
             raise NotSameTypeError(self.__dictionary, 'Config cannot be sorted')
 
         return self.__sorted_dict(self.__dictionary, key=key, reverse=reverse)
 
-    def sort_by_keys(self, *, key: Optional[Callable] = None, reverse: Optional[bool] = False):
+    def sort_by_keys(self, key: Optional[Callable] = None, reverse: Optional[bool] = False):
         """self.sort_by_keys(self, key=None, reverse=False)
 Sorts config by keys
-Raises NotSameTypeError if keys not same type
 
-kwarg:    type:   default:
-:key      func    None
-:reverse  bool    False
-
-rtype: self"""
+:param key: sorting function = None
+:type key: Callable
+:param reverse: reverse dictionary = False
+:type reverse: bool
+:raises NotSameTypeError: if keys not same type
+:returns: self
+:rtype: ConfigJson"""
         if not self.__is_all_keys_same_type(self.__dictionary):
             raise NotSameTypeError(self.__dictionary, 'Config cannot be sorted')
 
@@ -264,17 +286,18 @@ rtype: self"""
         self.__save_json()
         return self
 
-    def sorted_by_values(self, *, key: Optional[Callable] = None, reverse: Optional[bool] = False) -> dict:
+    def sorted_by_values(self, key: Optional[Callable] = None, reverse: Optional[bool] = False) -> dict:
         """self.sorted_by_values(self, key=None, reverse=False)
 Returns sorted config by values
-Raises NotSameTypeError if values not same type
-Raises RepetitionsError if values has repetitions
 
-kwarg:    type:   default:
-:key      func    None
-:reverse  bool    False
-
-rtype: dict"""
+:param key: sorting function = None
+:type key: Callable
+:param reverse: reverse dictionary = False
+:type reverse: bool
+:raises NotSameTypeError: if values not same type
+:raises RepetitionsError: if values has repetitions
+:returns: sorted dictionary by keys
+:rtype: dict"""
         self.__load_from_file()
         if not self.__is_all_values_same_type(self.__dictionary):
             raise NotSameTypeError(self.__dictionary, 'Config cannot be sorted')
@@ -284,17 +307,18 @@ rtype: dict"""
         srt = self.__sorted_dict(self.__inverted(self.__dictionary), key=key, reverse=reverse)
         return self.__inverted(srt)
 
-    def sort_by_values(self, *, key: Optional[Callable] = None, reverse: Optional[bool] = False):
+    def sort_by_values(self, key: Optional[Callable] = None, reverse: Optional[bool] = False):
         """self.sort_by_values(self, key=None, reverse=False)
 Sorts config by values
-Raises NotSameTypeError if values not same type
-Raises RepetitionsError if values has repetitions
 
-kwarg:    type:   default:
-:key      func    None
-:reverse  bool    False
-
-rtype: self"""
+:param key: sorting function = None
+:type key: Callable
+:param reverse: reverse dictionary = False
+:type reverse: bool
+:raises NotSameTypeError: if values not same type
+:raises RepetitionsError: if values has repetitions
+:returns: self
+:rtype: ConfigJson"""
         if not self.__is_all_values_same_type(self.__dictionary):
             raise NotSameTypeError(self.__dictionary, "Config cannot be sorted")
         if self.__is_are_repetitions_in_values(self.__dictionary):
@@ -305,64 +329,66 @@ rtype: self"""
         return self
 
     @staticmethod
-    def __filtered_dict(dictionary_: dict, *, key: Optional[Callable] = None) -> dict:
+    def __filtered_dict(dictionary_: dict, key: Optional[Callable] = None) -> dict:
         """self.__filtered_dict(dictionary_, key=None)
 Returns filtered dict by keys
 
-kwarg:    type:   default:
-:key      func    None
-
-rtype: dict"""
+:param dictionary_: dict to be filtered
+:type dictionary_: dict
+:param key: filtering function = None
+:type key: Callable
+:returns: filtered dictionary by keys
+:rtype: dict"""
         filtered = filter(key, dictionary_.keys())
         return {i: dictionary_[i] for i in filtered}
 
-    def filtered_by_keys(self, *, key: Optional[Callable] = None) -> dict:
+    def filtered_by_keys(self, key: Optional[Callable] = None) -> dict:
         """self.filtered_by_keys(self, key=None, reverse=False)
 Returns filtered config by keys
 
-kwarg:    type:   default:
-:key      func    None
-
-rtype: dict"""
+:param key: filtering function = None
+:type key: Callable
+:returns: filtered dictionary by keys
+:rtype: dict"""
         self.__load_from_file()
         return self.__filtered_dict(self.__dictionary, key=key)
 
-    def filter_by_keys(self, *, key: Optional[Callable] = None):
+    def filter_by_keys(self, key: Optional[Callable] = None):
         """self.filter_by_keys(self, key=None)
 Filter config by keys
 
-kwarg:    type:   default:
-:key      func    None
-
-rtype: self"""
+:param key: filtering function = None
+:type key: Callable
+:returns: self
+:rtype: ConfigJson"""
         self.__dictionary = self.filtered_by_keys(key=key)
         self.__save_json()
         return self
 
-    def filtered_by_values(self, *, key: Optional[Callable] = None) -> dict:
+    def filtered_by_values(self, key: Optional[Callable] = None) -> dict:
         """self.filtered_by_values(self, key=None)
-Returns filtered dict by values
-Raises RepetitionsError if values has repetitions
+Returns filtered config by values
 
-kwarg:    type:   default:
-:key      func    None
-
-rtype: dict"""
+:param key: filtering function = None
+:type key: Callable
+:raises RepetitionsError: if values has repetitions
+:returns: filtered dictionary by values
+:rtype: dict"""
         self.__load_from_file()
         if self.__is_are_repetitions_in_values(self.__dictionary):
             raise RepetitionsError(self.__dictionary, 'Config cannot be filtered')
         filtered = self.__filtered_dict(self.__inverted(self.__dictionary), key=key)
         return self.__inverted(filtered)
 
-    def filter_by_values(self, *, key: Optional[Callable] = None):
+    def filter_by_values(self, key: Optional[Callable] = None):
         """self.filter_by_values(self, key=None)
 Filter dict by values
-Raises RepetitionsError if values has repetitions
 
-kwarg:    type:   default:
-:key      func    None
-
-rtype: self"""
+:param key: filtering function = None
+:type key: Callable
+:raises RepetitionsError: if values has repetitions
+:returns: self
+:rtype: ConfigJson"""
         self.__dictionary = self.filtered_by_values(key=key)
         self.__save_json()
         return self
@@ -371,15 +397,17 @@ rtype: self"""
         """len(self)
 Returns length of dictionary
 
-rtype: int"""
+:returns: length of dictionary
+:rtype: int"""
         self.__load_from_file()
         return len(self.__dictionary)
 
     def __iter__(self) -> Iterable:
         """for i in self:
-Returns tuple of key, value every iteration
+Returns tuple of (key, value) every iteration
 
-@rtype: Iter"""
+:returns: tuple of (key, value) every iteration
+:rtype: Iterable"""
         self.__load_from_file()
         return iter(self.__dictionary.items())
 
@@ -387,10 +415,10 @@ Returns tuple of key, value every iteration
         """if item in self:
 Returns True if config contains key
 
-arg:      type:
-:item     Any
-
-rtype: bool"""
+:param item: item
+:type item: Any
+:returns: True if item in dict keys
+:rtype: bool"""
         if item in self.__dictionary.keys():
             return True
         else:
@@ -398,10 +426,10 @@ rtype: bool"""
 
     def items(self) -> ItemsView:
         """self.items()
-Returns list of tuples with key, value, ex:
+Returns list of tuples with (key, value), ex:
 [(key1, value1), (key2, value2)]
 
-rtype: list"""
+:rtype: ItemsView"""
         return self.__dictionary.items()
 
     def __add__(self, other: Union[tuple[Any, Any], list[Any, Any]]) -> dict:
