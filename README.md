@@ -45,4 +45,4 @@ print(cfg['val1'])  # 1
 | `cfg.filtered_by_keys(key=func)`               | dict               | Возвращает фильтрованный словарь по **ключам**, _key_ - функция сортировки
 | `cfg.filtered_by_values(key=func)`             | dict               | Возвращает фильтрованный словарь по **значениям**, _key_ - функция сортировки. Бросает _RepetitionsError_, если в ключах есть повторения
 
-
+<h1 align="center"><a href="#top">▲</a></h1>
